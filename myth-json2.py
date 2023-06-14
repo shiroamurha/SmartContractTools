@@ -55,13 +55,24 @@ def main():
 
 def set_imports(file):
 
-    index = 0
-    imports = []
     file = open(f'{file}.sol', 'r').read()
 
+    index = 0
+    imports = []
+    
     while index != -1:
-        imports.append(file[file.find('"', index)+1:file.find('"', file.find('"', index)+1)])
-        index = file.find('"', file.find('"', file.find('"', index)+1)+1)
+
+        first_quote_index = file.find('"', index)+1
+        second_quote_index = file.find('"', first_quote_index)
+        after_two_quotes = file.find('"', second_quote_index+1)
+
+        imports.append(file[
+
+            first_quote_index : second_quote_index
+
+        ])
+        index = after_two_quotes
+
 
     indexes_to_delete = []
 
@@ -78,15 +89,20 @@ def set_imports(file):
         imports[i].reverse()
         imports[i] = str().join(imports[i])
 
-    print(imports)
 
-    
-    
-    
-    
-    
+    imports = [ f'{imports[i][3:]}={imports[i]}' for i in range(len(imports))]
+    # transforma '../libs/openzeppelin_v2_5_0/math/'
+    # em 'libs/openzeppelin_v2_5_0/math/=../libs/openzeppelin_v2_5_0/math/'
+
+    import_assets_json = {'remappings': imports}
+    json.dump(
+        import_assets_json,
+        open('import_assets.json', 'w'),
+        indent=4
+    )
+
 
 
 if __name__ == '__main__':
-    #main() 
     set_imports('EthieToken')
+    #main() 
