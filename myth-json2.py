@@ -23,8 +23,10 @@ def main():
 
         else: 
             for sol_file in sol_files_list:
+
+                set_imports(sol_file)
                 start_time = time()
-                analysis = popen(f'myth analyze {sol_file}.sol -o json --max-depth 50').read()
+                analysis = popen(f'myth analyze {sol_file}.sol -o json --max-depth 25 --solc-json import_assets.json').read()
 
                 json.dump(
                     json.loads(analysis), 
@@ -38,8 +40,9 @@ def main():
 
     else:
 
+        set_imports(sol_)
         start_time = time()
-        analysis = popen(f'myth analyze {sol_}.sol -o json --max-depth 50').read()
+        analysis = popen(f'myth analyze {sol_}.sol -o json --max-depth 25 --solc-json import_assets.json').read()
         
         json.dump(
             json.loads(analysis), 
@@ -104,5 +107,4 @@ def set_imports(file):
 
 
 if __name__ == '__main__':
-    set_imports('EthieToken')
-    #main() 
+    main() 
