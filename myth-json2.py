@@ -92,7 +92,7 @@ def set_imports(file):
         imports[i].reverse()
         imports[i] = str().join(imports[i])
 
-
+    ## TODO --> deletar as strings que tem so '../'
     imports = [ f'{imports[i][3:]}={imports[i]}' for i in range(len(imports))]
     # transforma '../libs/openzeppelin_v2_5_0/math/'
     # em 'libs/openzeppelin_v2_5_0/math/=../libs/openzeppelin_v2_5_0/math/'
