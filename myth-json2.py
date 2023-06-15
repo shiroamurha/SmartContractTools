@@ -76,7 +76,6 @@ def set_imports(file):
         ])
         index = after_two_quotes
 
-
     indexes_to_delete = []
 
     for item in imports:
@@ -92,7 +91,14 @@ def set_imports(file):
         imports[i].reverse()
         imports[i] = str().join(imports[i])
 
-    ## TODO --> deletar as strings que tem so '../'
+    # deletando strings que sao apenas '../'
+    items_to_delete = []
+    for item in imports:
+        if item == '../':
+            items_to_delete.append(item)
+    for item in items_to_delete:
+        imports.remove(item)
+
     imports = [ f'{imports[i][3:]}={imports[i]}' for i in range(len(imports))]
     # transforma '../libs/openzeppelin_v2_5_0/math/'
     # em 'libs/openzeppelin_v2_5_0/math/=../libs/openzeppelin_v2_5_0/math/'
@@ -107,4 +113,4 @@ def set_imports(file):
 
 
 if __name__ == '__main__':
-    main() 
+    set_imports('WithdrawPool')
