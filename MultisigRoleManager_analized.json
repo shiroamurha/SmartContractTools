@@ -1,5 +1,0 @@
-{
-    "success": false,
-    "error": "Solc experienced a fatal error.\n\nMultisigRoleManager.sol:3:1: ParserError: Source \"modules/databases/RoleDB.sol\" not found: File not found.\nimport \"../modules/databases/RoleDB.sol\";\n^---------------------------------------^\n",
-    "issues": []
-}
