@@ -51,9 +51,10 @@ def main():
         )
 
         time_spent = time() - start_time
-        time_spent = [int(time_spent/60), time_spent%60]
+        time_spent = [int(time_spent/60), round(time_spent%60)]
         print(f'Done {sol_} analysis in {time_spent[0]} minutes and {time_spent[1]} seconds.')
 
+    popen('rm -f import_assets.json')
     print('Analysis complete.')
 
 def set_imports(file):
@@ -113,4 +114,4 @@ def set_imports(file):
 
 
 if __name__ == '__main__':
-    set_imports('WithdrawPool')
+    main()
