@@ -85,12 +85,13 @@ def set_imports(file):
     del imports[indexes_to_delete[0]:]
 
     for i in range(len(imports)):
-        # deleta o arquivo .sol do path
-        imports[i] = list(imports[i])
-        imports[i].reverse()
-        imports[i] = imports[i][imports[i].index('/'):]
-        imports[i].reverse()
-        imports[i] = str().join(imports[i])
+        if imports[i].count('/') > 1:
+            # deleta o arquivo .sol do path
+            imports[i] = list(imports[i])
+            imports[i].reverse()
+            imports[i] = imports[i][imports[i].index('/'):]
+            imports[i].reverse()
+            imports[i] = str().join(imports[i])
 
     # deletando strings que sao apenas '../'
     items_to_delete = []
