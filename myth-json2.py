@@ -30,7 +30,7 @@ def main():
 
                 json.dump(
                     json.loads(analysis), 
-                    open(f'{sol_file}_analized.json', 'w'), 
+                    open(f'{sol_file}_analyzed.json', 'w'), 
                     indent=4
                 )
 
@@ -46,7 +46,7 @@ def main():
         
         json.dump(
             json.loads(analysis), 
-            open(f'{sol_}_analized.json', 'w'), 
+            open(f'{sol_}_analyzed.json', 'w'), 
             indent=4
         )
 
