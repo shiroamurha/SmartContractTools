@@ -14,8 +14,10 @@
 <blockquote> <b>A DECIDIR: interface gráfica do script, facilitando ainda mais o processo de testes</b> </blockquote>
 
 
-<h1 align="center">Análises de contrato já executadas</h1>
+<h1 align="center">Análises de Smart Contracts</h1>
 <ul>
+<h3>Problemas conhecidos</h3>
+    <li> Quando um contrato importado por outro usa uma versão diferente de solidity do contrato principal, mythril não completa a análise, retornando um erro no output da análise.</li>
 <h3>CryptoKitties</h3>    
     <li><i><b> /contracts/GameVarAndFee.sol: </b></i> Erro com a versão do authority/Owned.sol, todos os contratos usam solidity 0.5.5 e Owned usa 0.5.0. Alterando a sua versão não muda o resultado.</li>
     <li><i><b> /contracts/CronJob.sol: </b></i>Mesmo erro de versão do authority/Owned.sol</li>
