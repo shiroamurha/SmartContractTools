@@ -2,10 +2,15 @@
 
 
 <h1 align="center">Tutorial</h1>
-<h3>Requisitos: Python 3.9+ instalado; Mythril instalado, pode ser feito com o comando <code>pip install mythril</code> (OBS: Mythril só tem suporte para sistemas baseados em Linux)</h3>
+<h3>Requisitos:</h3>
+<ul>
+    <li>Python 3.9+ instalado; </li>
+    <li>Mythril instalado, pode ser feito com o comando <code>pip install mythril</code> </li>
+    <p><i><b>OBS: Mythril só tem suporte para sistemas baseados em Linux</i></b></p>
+</ul>
 <p>O processo de automação das configurações da ferramenta de testes de Smart Contracts chamada Mythril se torna necessário a partir do momento em que os contratos recebem uma grande quantidade de imports, mas também quando precisa-se testar contratos em massa.</p>
-<p>O script python myth-json2.py automatiza esse processo inteiro de configurações de imports dos contratos em um arquivo temporário, e após utiliza o comando <code>myth analyze <file> -o json --max-depth 25 --solc-json import_assets.json </code> para análise em si do contrato, retornando o tempo da execução no terminal e um arquivo json com a análise do contrato no padrão NomeDoArquivo_analyzed.json. A profundidade de hashes testados imposta <code>--max-depth 25</code> é padrão como 22 mas pode ser alterada com essa definição, que pode ser alterada no código dependendo da necessidade. A definição <code>-o json</code> serve para retornar a análise no formato json, que por padrão é apenas um texto no terminal. A configuração <code>--solc-json import_assets.json</code> serve para apontar o arquivo import_assets.json (que é o arquivo temporário criado pelo script) como os remapeamentos de imports para a análise do contrato.</p>
-<p>Para a utilização do script, basta pô-lo no diretório onde encontram-se os contratos a serem analisados e abrí-lo com o comando <code>python3 myth-json2.py</code> (Linux). Após a inicialização, haverá uma entrada a ser feita com o nome do contrato (sem incluir a extensão .sol) a se analisar, pode ser utilizada a entrada 0 para que se analise todos os contratos do diretório onde o script se encontra.</p>
+<p>O script python myth2json.py automatiza esse processo inteiro de configurações de imports dos contratos em um arquivo temporário, e após utiliza o comando <code>myth analyze <file> -o json --max-depth 25 --solc-json import_assets.json </code> para análise em si do contrato, retornando o tempo da execução no terminal e um arquivo json com a análise do contrato no padrão NomeDoArquivo_analyzed.json. A profundidade de hashes testados imposta <code>--max-depth 25</code> é padrão como 22 mas pode ser alterada com essa definição, que pode ser alterada no código dependendo da necessidade. A definição <code>-o json</code> serve para retornar a análise no formato json, que por padrão é apenas um texto no terminal. A configuração <code>--solc-json import_assets.json</code> serve para apontar o arquivo import_assets.json (que é o arquivo temporário criado pelo script) como os remapeamentos de imports para a análise do contrato.</p>
+<p>Para a utilização do script, basta pô-lo no diretório onde encontram-se os contratos a serem analisados e abrí-lo com o comando <code>python3 myth2json.py</code> (Linux). Após a inicialização, haverá uma entrada a ser feita com o nome do contrato (sem incluir a extensão .sol) a se analisar, pode ser utilizada a entrada 0 para que se analise todos os contratos do diretório onde o script se encontra.</p>
 <blockquote> <b>A DECIDIR: interface gráfica do script, facilitando ainda mais o processo de testes</b> </blockquote>
 
 
