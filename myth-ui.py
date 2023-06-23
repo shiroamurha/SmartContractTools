@@ -1,12 +1,21 @@
 import PySimpleGUI as sg
+import os
 
 
 
 def init_ui():
 
     global layout
-    #sg.Input(key='solc', size=(15, 2)
-    sg.theme('DarkAmber')
+    sol_files_list = ['|| ALL FILES ||']
+
+    file_path = os.path.dirname(os.path.abspath(__file__))
+    dir_files = str(os.popen('ls').read()).split('\n')
+
+    for item in dir_files:
+        if '.sol' in item:
+            sol_files_list.append(item.replace('.sol', ''))
+    
+    sg.theme('DarkGrey2')
     frames_size = (310, 260)
 
     input_frame = [[sg.Frame('File Assets', [
@@ -14,42 +23,56 @@ def init_ui():
             sg.Text('Solidity File: ', size=(10, 1), font='arial 11 bold'), sg.Stretch(), 
             
             sg.Combo(
-                values=['value' for _ in range(8)], ## placeholder
+                values=sol_files_list, ## placeholder
                 default_value=None,
                 size=(23,6),
                 font='arial 11',
-                key='sol file'
+                key='sol file',
+                readonly=True
             ), sg.Push()
         ],
 
         [
             sg.VPush(),
-            sg.FolderBrowse('..', font='arial 8 bold'),
-            sg.Input('PLACEHOLDER', key='file directory', size=(35,1), font='arial 11', enable_events=True)
+            sg.FolderBrowse('..', font='arial 8 bold', pad=(1,0), button_color='#B3B3B3 on #284B5A', initial_folder=file_path),
+            sg.Input(file_path, key='file directory', size=(35,1), pad=(0,0), font='arial 11', enable_events=True, border_width=0)
         ],
 
         [
             sg.VPush(),
-            sg.FolderBrowse('..', font='arial 8 bold'),
-            sg.Input('PLACEHOLDER', key='analysis dump directory', size=(35,1), font='arial 11', enable_events=True)
+            sg.FolderBrowse('..', font='arial 8 bold', pad=(1,0), button_color='#B3B3B3 on #284B5A'),
+            sg.Input(default_text=f'{file_path}/analysis', key='analysis dump directory', size=(35,1), pad=(0,0), font='arial 11', enable_events=True, border_width=0, )
         ], 
-        [sg.VPush()],
         [
-            sg.VPush(),
-            sg.Button('START ANALYSIS', font='verdana 15 bold', button_color='black on ', size=(20,3), key='start')
+            sg.Button(
+                'START ANALYSIS', 
+                font='verdana 15 bold', 
+                button_color='black on #ed4245', 
+                size=(20,3), 
+                key='start',
+                mouseover_colors=('#141414', '#7a2223'),
+                border_width=0
+            ),
         ]
-    ], size=frames_size, relief=sg.RELIEF_SUNKEN, pad=(0, 0))]]
+    ], size=frames_size, relief=sg.RELIEF_SUNKEN, pad=(0, 0), border_width=0)]]
 
     output_frame = [[sg.Frame('Output', [
 
         [sg.Multiline(
-            size=(40, 15), 
+            size=(40, 17), 
             key='OUTPUT', 
             autoscroll=True, 
             disabled=True, 
             background_color='black', 
-            text_color='white')]
-    ], size=frames_size, pad=(0, 0))]]
+            text_color='white', 
+            border_width=0, 
+            sbar_background_color='#284B5A',
+            sbar_trough_color='black',
+            sbar_frame_color = 'black',
+            sbar_relief = 'black',
+            sbar_arrow_color = '#B3B3B3'
+        )]
+    ], size=frames_size, pad=(0, 0), border_width=0)]]
 
 
     layout = [[
@@ -62,7 +85,7 @@ def init_ui():
 def main():
 
     init_ui()
-    window = sg.Window('Mythril to Json', layout, resizable=False)
+    window = sg.Window('Mythril to Json', layout, resizable=False, background_color='#282923')
 
     while True:  # Event Loop
         event, values = window.read()
