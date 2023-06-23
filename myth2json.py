@@ -71,7 +71,11 @@ def main():
 def set_imports(file):
 
     # abre o contrato especificado no argumento da funçao
-    file = open(f'{file}.sol', 'r').read()
+    try:
+        file = open(f'{file}.sol', 'r').read()
+
+    except FileNotFoundError: # se o arquivo nao existir, levanta uma exceção
+        raise FileNotFoundError(f'Specified file {file}.sol not found')
 
     index = 0
     imports = []
