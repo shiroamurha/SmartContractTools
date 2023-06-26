@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import os
+import myth2json
 
 
 
@@ -59,8 +60,9 @@ def init_ui():
     output_frame = [[sg.Frame('Output', [
 
         [sg.Multiline(
-            size=(40, 17), 
+            size=(50, 17), 
             key='OUTPUT', 
+            font = 'Consolas 9 bold',
             autoscroll=True, 
             disabled=True, 
             background_color='black', 
@@ -70,9 +72,10 @@ def init_ui():
             sbar_trough_color='black',
             sbar_frame_color = 'black',
             sbar_relief = 'black',
-            sbar_arrow_color = '#B3B3B3'
+            sbar_arrow_color = '#B3B3B3', 
+            reroute_stdout=True
         )]
-    ], size=frames_size, pad=(0, 0), border_width=0)]]
+    ], size= (370, 260), pad=(0, 0), border_width=0)]]
 
 
     layout = [[
@@ -86,16 +89,19 @@ def main():
 
     init_ui()
     window = sg.Window('Mythril to Json', layout, resizable=False, background_color='#282923')
-
+    
     while True:  # Event Loop
         event, values = window.read()
-        print(event, values)
+        #print(event, values)
         if event == sg.WIN_CLOSED:
             break
         if event == 'start':
-            window['OUTPUT'].update(
-                f'{values["OUTPUT"]}\nsla oq coimeço aqui este arquivo da silva: {values["sol file"]}'
-            )
+
+            if values["sol file"] == '|| ALL FILES ||':
+                myth2json.main()
+
+            else:
+                myth2json.main(values["sol file"])
 
     window.close()
 

@@ -4,9 +4,9 @@ from time import time
 
 
 
-def main():
+def main(sol_ = '0', disable_print_output = False):
     
-    sol_ = input('solidity file: ') # sem .sol 
+    # sol_ = input('solidity file: ') # sem .sol 
     # TODO: trocar o input por parametro no main() pra utilizaçao na interface (talvez)
 
     # input zero pega todos os arquivos do diretório e faz análise um por um
@@ -21,7 +21,7 @@ def main():
                 sol_files_list.append(item.replace('.sol', ''))
                 
         if sol_files_list == []:
-            print('There is no solidity file on the directory')
+            print('There is no solidity file on the directory') if not disable_print_output else 0
         # retorna isso ai ^^^^ se nao achar nenhum arquivo .sol no diretorio
 
         else: 
@@ -46,7 +46,7 @@ def main():
                 time_spent = [int(time_spent/60), round(time_spent%60)]
                 # calculo de diferença do tempo
 
-                print(f'Done {sol_file} analysis in {time_spent[0]} minutes and {time_spent[1]} seconds.')
+                print(f'Done {sol_file} analysis in {time_spent[0]} minutes and {time_spent[1]} seconds.') if not disable_print_output else 0
                 # output da analise com o tempo de execuçao de cada um
     else:
 
@@ -62,11 +62,11 @@ def main():
 
         time_spent = time() - start_time
         time_spent = [int(time_spent/60), round(time_spent%60)]
-        print(f'Done {sol_} analysis in {time_spent[0]} minutes and {time_spent[1]} seconds.')
+        print(f'Done {sol_} analysis in {time_spent[0]} minutes and {time_spent[1]} seconds.') if not disable_print_output else 0
 
     # deleta o arquivo de imports pq ele so serve pra o mythril analisar 
     popen('rm -f import_assets.json')
-    print('Analysis complete.')
+    print('Analysis complete.') if not disable_print_output else 0
 
 def set_imports(file):
 
@@ -132,7 +132,12 @@ def set_imports(file):
     )
     # completa jogando o dicionario de imports dentro do arquivo import_assets.json
 
+def interactive_main():
+
+    solfile = input('solidity file (without .sol): ')
+    main(solfile, disable_print_output=False)
+
 
 
 if __name__ == '__main__':
-    main()
+    interactive_main()
