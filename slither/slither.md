@@ -6,7 +6,7 @@
 
 <p>Problemas conhecidos: 
   <ul>
-    <li>imports de contratos com versões diferentes do contrato sendo testado, em ambas ferramentas, levanta um erro na compilação do próprio Solidity.</li>
+    <li>imports de contratos com versões diferentes do contrato sendo testado, em ambas ferramentas, levanta um erro no compilador de Solidity.</li>
     <li>de vez em quando rodar slither com o prefixo que faz os imports funcionarem as vezes faz os imports não funcionarem (?????), para resolver basta não usar o prefixo do diretório.</li>
   </ul>
 </p>
